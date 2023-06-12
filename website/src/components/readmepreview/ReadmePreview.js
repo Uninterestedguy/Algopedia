@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { marked } from "marked";
 
-function ReadmePreview({ readmePath,readmeTitle }) {
+function ReadmePreview({ readmePath }) {
   const [readme, setReadme] = useState("");
   const readmeRawUrl =
     "https://raw.githubusercontent.com/Kamran1819G/Algopedia/main" + readmePath;
@@ -15,35 +15,42 @@ function ReadmePreview({ readmePath,readmeTitle }) {
   }, [readmeRawUrl]);
 
   useEffect(() => {
-    const readmeDiv = document.getElementById("readme");
-    readmeDiv.innerHTML = marked.parse(readme);
-  }, [readme]);
-
-  return (
-    <Container fluid="lg">
-      <Row>
-        <Col lg="12">
-          <div className="readme-preview">
-            <h2 className="mt-4 mb-4">{readmeTitle}</h2>
-            <div id="readme"></div>
-          </div>
-          <div className="d-flex justify-content-end">
-            <a
-              className="btn btn-primary"
-              href={
-                "https://github.com/Kamran1819G/Algopedia/tree/main" +
-                readmePath
-              }
-              rel="noreferrer"
-              target="_blank"
-            >
-              <i className="bi bi-git"></i> Make a contribution
-            </a>
-          </div>
-        </Col>
-      </Row>
-    </Container>
-  );
+    if (
+      "https://raw.githubusercontent.com/Kamran1819G/Algopedia/main" !==
+      readmeRawUrl
+    ) {
+      const readmeDiv = document.getElementById("readme");
+      readmeDiv.innerHTML = marked.parse(readme);
+    }
+  }, [readme, readmeRawUrl]);
+  if (
+    readmeRawUrl !==
+    "https://raw.githubusercontent.com/Kamran1819G/Algopedia/main"
+  )
+    return (
+      <Container fluid="lg">
+        <Row>
+          <Col lg="12">
+            <div className="readme-preview">
+              <div id="readme"></div>
+            </div>
+            <div className="d-flex justify-content-end">
+              <a
+                className="btn btn-primary"
+                href={
+                  "https://github.com/Kamran1819G/Algopedia/tree/main" +
+                  readmePath
+                }
+                rel="noreferrer"
+                target="_blank"
+              >
+                <i className="bi bi-git"></i> Make a contribution
+              </a>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    );
 }
 
 export default ReadmePreview;

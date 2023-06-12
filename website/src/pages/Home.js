@@ -6,6 +6,9 @@ import SearchBar from "../components/searchsystem/SearchBar";
 import { Helmet } from "react-helmet";
 import ReactGA from 'react-ga';
 
+ReactGA.initialize('UA-205765794-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
+
 
 function Home() {
   const [results, setResults] = useState([]);
@@ -76,7 +79,7 @@ function Home() {
                 </h3>
               </div>
             </Col>
-            <Col lg={6} sm={12} className="pb-5">
+            <Col lg={8} sm={12} className="pb-5">
               <SearchBar onSearch={handleSearch} />
             </Col>
             <Col lg={12} md={12} sm={12}>

@@ -23,12 +23,7 @@ function App() {
   const [Algorithms, setAlgorithms] = useState([]);
 
   useEffect(() => {
-    ReactGA.initialize('G-0GC47WHF6L', {
-      titleCase: true,
-      gaOptions: {
-        siteSpeedSampleRate: 100
-      }
-    });
+    ReactGA.initialize("G-0GC47WHF6L");
     ReactGA.pageview(window.location.pathname + window.location.search);
   }, []);
 
